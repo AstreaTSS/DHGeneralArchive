@@ -1,6 +1,8 @@
 # Despair's Horizon General Archive
 
-<img src="https://cdn.discordapp.com/attachments/673624802937798656/808049968135798784/image0.jpg" alt="Despair's Horizon's Logo" width="700"/>
+<p align="center">
+  <img src="https://cdn.discordapp.com/attachments/673624802937798656/808049968135798784/image0.jpg" alt="Despair's Horizon's Logo" width="700"/>
+</p>
 
 
 All Channels:
