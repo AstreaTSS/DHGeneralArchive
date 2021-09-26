@@ -1,0 +1,2542 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Danganronpa: Despair&#39;s Horizon - ballroom</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+            font-weight: 600;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+            font-weight: 700;
+        }
+
+        body {
+            background-color: #36393e;
+            color: #dcddde;
+            font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+        }
+
+        a {
+            color: #00aff4;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img {
+            object-fit: contain;
+        }
+
+        .markdown {
+            max-width: 100%;
+            line-height: 1.3;
+            overflow-wrap: break-word;
+        }
+
+        .preserve-whitespace {
+            white-space: pre-wrap;
+        }
+
+        .spoiler-text {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .spoiler-text--hidden {
+            cursor: pointer;
+            background-color: #202225;
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .spoiler-text--hidden:hover {
+            background-color: rgba(32, 34, 37, 0.8);
+        }
+
+        .spoiler-text--hidden::selection {
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .quote {
+            display: flex;
+            margin: 0.05em 0;
+        }
+
+        .quote::before {
+            content: "";
+            margin-right: 0.5em;
+            border: 2px solid #4f545c;
+            border-radius: 3px;
+        }
+
+        .pre {
+            background-color: #2f3136;
+            font-family: "Consolas", "Courier New", Courier, monospace;
+        }
+
+        .pre--multiline {
+            margin-top: 0.25em;
+            padding: 0.5em;
+            border: 2px solid #282b30;
+            border-radius: 5px;
+            color: #b9bbbe;
+        }
+
+        .pre--multiline.hljs {
+            background-color: #2f3136;
+            color: #b9bbbe;
+        }
+
+        .pre--inline {
+            padding: 2px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        .mention {
+            border-radius: 3px;
+            padding: 0 2px;
+            color: #7289da;
+            background-color: rgba(114, 137, 218, .1);
+            font-weight: 500;
+        }
+
+        .timestamp {
+            border-radius: 3px;
+            padding: 0 2px;
+            background-color: rgba(255, 255, 255, 0.06);
+        }
+
+        .emoji {
+            width: 1.325em;
+            height: 1.325em;
+            margin: 0 0.06em;
+            vertical-align: -0.4em;
+        }
+
+        .emoji--small {
+            width: 1em;
+            height: 1em;
+        }
+
+        .emoji--large {
+            width: 2.8em;
+            height: 2.8em;
+        }
+
+        .preamble {
+            display: grid;
+            margin: 0 0.3em 0.6em 0.3em;
+            max-width: 100%;
+            grid-template-columns: auto 1fr;
+        }
+
+        .preamble__guild-icon-container {
+            grid-column: 1;
+        }
+
+        .preamble__guild-icon {
+            max-width: 88px;
+            max-height: 88px;
+        }
+
+        .preamble__entries-container {
+            grid-column: 2;
+            margin-left: 0.6em;
+        }
+
+        .preamble__entry {
+            font-size: 1.4em;
+            color: #ffffff;
+        }
+
+        .preamble__entry--small {
+            font-size: 1em;
+        }
+
+        .chatlog {
+            max-width: 100%;
+        }
+
+        .chatlog__message-group {
+            display: grid;
+            margin: 0 0.6em;
+            padding: 0.9em 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            grid-template-columns: auto 1fr;
+        }
+
+        .chatlog__reference-symbol {
+            grid-column: 1;
+            margin: 8px 4px 4px 18px;
+            border-left: 2px solid #4f545c;
+            border-top: 2px solid #4f545c;
+            border-radius: 8px 0 0 0;
+        }
+
+        .chatlog__reference {
+            display: flex;
+            grid-column: 2;
+            margin-bottom: 0.25em;
+            font-size: 0.875em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            align-items: center;
+            color: #b5b6b8;
+        }
+
+        .chatlog__reference-avatar {
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            margin-right: 0.25em;
+        }
+
+        .chatlog__reference-name {
+            margin-right: 0.3em;
+            font-weight: 600;
+        }
+
+        .chatlog__reference-content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__reference-content a:hover {
+            text-decoration: none;
+        }
+
+        .chatlog__reference-link {
+            cursor: pointer;
+            color: #b5b6b8;
+        }
+
+        .chatlog__reference-link * {
+            display: inline;
+            pointer-events: none;
+        }
+
+        .chatlog__reference-link:hover {
+            color: #ffffff;
+        }
+
+        .chatlog__reference-link:hover *:not(.spoiler-text) {
+            color: #ffffff;
+        }
+
+        .chatlog__reference-edited-timestamp {
+            margin-left: 0.25em;
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatlog__author-avatar-container {
+            grid-column: 1;
+            width: 40px;
+            height: 40px;
+            margin-right: 16px;
+        }
+
+        .chatlog__author-avatar {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .chatlog__messages {
+            grid-column: 2;
+            min-width: 50%;
+        }
+
+        .chatlog__author-name {
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .chatlog__timestamp {
+            margin-left: 0.3em;
+            font-size: 0.75em;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatlog__message {
+            padding: 0.1em 0.3em;
+            margin: 0 -0.3em;
+            background-color: transparent;
+            transition: background-color 1s ease;
+        }
+
+        .chatlog__message--highlighted {
+            background-color: rgba(114, 137, 218, 0.2);
+        }
+
+        .chatlog__message--pinned {
+            background-color: rgba(249, 168, 37, 0.05);
+        }
+
+        .chatlog__content {
+            font-size: 0.95em;
+            word-wrap: break-word;
+        }
+
+        .chatlog__edited-timestamp {
+            margin-left: 0.15em;
+            font-size: 0.8em;
+        }
+
+        .chatlog__attachment {
+            display: inline-block;
+            position: relative;
+            margin-top: 0.3em;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden {
+            cursor: pointer;
+            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .chatlog__attachment--hidden * {
+            pointer-events: none;
+        }
+
+        .chatlog__attachment-spoiler-caption {
+            display: none;
+            z-index: 999;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 0.4em 0.8em;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 20px;
+            color: #dcddde;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-spoiler-caption {
+            display: block;
+        }
+
+        .chatlog__attachment--hidden:hover .chatlog__attachment-spoiler-caption {
+            color: #fff;
+        }
+
+        .chatlog__attachment-media {
+            vertical-align: top;
+            max-width: 45vw;
+            max-height: 500px;
+            border-radius: 3px;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-media {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic {
+            width: 100%;
+            max-width: 520px;
+            height: 40px;
+            padding: 10px;
+            background-color: #2f3136;
+            border: 1px solid #292b2f;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-generic {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic-icon {
+            float: left;
+            width: 30px;
+            height: 100%;
+            margin-right: 10px;
+        }
+
+        .chatlog__attachment-generic-size {
+            color: #72767d;
+            font-size: 12px;
+        }
+
+        .chatlog__attachment-generic-name {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__edited-timestamp {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatlog__embed {
+            display: flex;
+            margin-top: 0.3em;
+            max-width: 520px;
+        }
+
+        .chatlog__embed-color-pill {
+            flex-shrink: 0;
+            width: 0.25em;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+
+        .chatlog__embed-color-pill--default {
+            background-color: #202225;
+        }
+
+        .chatlog__embed-content-container {
+            display: flex;
+            flex-direction: column;
+            padding: 0.5em 0.6em;
+            background-color: rgba(46, 48, 54, 0.3);
+            border: 1px solid rgba(46, 48, 54, 0.6);
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+
+        .chatlog__embed-content {
+            display: flex;
+            width: 100%;
+        }
+
+        .chatlog__embed-text {
+            flex: 1;
+        }
+
+        .chatlog__embed-author {
+            display: flex;
+            margin-bottom: 0.3em;
+            align-items: center;
+        }
+
+        .chatlog__embed-author-icon {
+            margin-right: 0.5em;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .chatlog__embed-author-name {
+            font-size: 0.875em;
+            font-weight: 600;
+            color: #ffffff
+        }
+
+        .chatlog__embed-author-name-link {
+            color: #ffffff;
+        }
+
+        .chatlog__embed-title {
+            margin-bottom: 0.2em;
+            font-size: 0.875em;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .chatlog__embed-description {
+            font-weight: 500;
+            font-size: 0.85em;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-fields {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 0.5em;
+        }
+
+        .chatlog__embed-field {
+            flex: 0;
+            min-width: 100%;
+            max-width: 506px;
+            padding-top: 0.6em;
+            font-size: 0.875em;
+        }
+
+        .chatlog__embed-field--inline {
+            flex: 1;
+            flex-basis: auto;
+            min-width: 150px;
+        }
+
+        .chatlog__embed-field-name {
+            margin-bottom: 0.2em;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .chatlog__embed-field-value {
+            font-weight: 500;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-thumbnail {
+            flex: 0;
+            margin-left: 1.2em;
+            max-width: 80px;
+            max-height: 80px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-image-container {
+            margin-top: 0.6em;
+        }
+
+        .chatlog__embed-image {
+            max-width: 500px;
+            max-height: 400px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-footer {
+            margin-top: 0.6em;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-footer-icon {
+            margin-right: 0.2em;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+
+        .chatlog__embed-footer-text {
+            vertical-align: middle;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+
+        .chatlog__embed-plainimage {
+            vertical-align: top;
+            max-width: 45vw;
+            max-height: 500px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-spotify {
+            border: 0;
+        }
+
+        .chatlog__embed-youtube-container {
+            margin-top: 0.6em;
+        }
+
+        .chatlog__embed-youtube {
+            border: 0;
+            border-radius: 3px;
+        }
+
+        .chatlog__reactions {
+            display: flex;
+        }
+
+        .chatlog__reaction {
+            display: flex;
+            align-items: center;
+            margin: 0.35em 0.1em 0.1em 0.1em;
+            padding: 0.2em 0.35em;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+
+        .chatlog__reaction-count {
+            min-width: 9px;
+            margin-left: 0.35em;
+            font-size: 0.875em;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .chatlog__bot-tag {
+            position: relative;
+            top: -.1em;
+            margin-left: 0.3em;
+            padding: 0.05em 0.3em;
+            border-radius: 3px;
+            line-height: 1.3;
+            background-color: #5865F2;
+            color: #ffffff;
+            font-size: 0.625em;
+            font-weight: 500;
+        }
+
+        .postamble {
+            margin: 1.4em 0.3em 0.6em 0.3em;
+            padding: 1em;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .postamble__entry {
+            color: #ffffff;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(block => hljs.highlightBlock(block));
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler-text--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler-text--hidden');
+            }
+            if (element && element.classList.contains('chatlog__attachment--hidden')) {
+                event.preventDefault();
+                element.classList.remove('chatlog__attachment--hidden');
+            }
+        }
+    </script>
+
+    <svg style="display: none">
+        <symbol id="icon-attachment" viewBox="0 0 720 960">
+            <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z" />
+            <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z" />
+            <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z" />
+            <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z" />
+        </symbol>
+    </svg>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/a_f11bcee482835c267adf7713facde8e4-D3D47.png" alt="Guild icon" loading="lazy">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">Danganronpa: Despair&#39;s Horizon</div>
+        <div class="preamble__entry">•❅─✧❅Side RP (City)❅✧─❅• / ballroom</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/28b51a7aef9ed8b2fd15f25d4e944041-E0C02.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="ImReallyScrewed#8206" data-user-id="578326021443420160" style="color: rgb(4,34,131)">Kev | ???</span>
+
+
+        <span class="chatlog__timestamp">21-Nov-20 12:05 PM</span>
+
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="779754329509855272" id="message-779754329509855272" title="Message sent: 21-Nov-20 12:05 PM">
+
+                    <div class="chatlog__attachment " onclick="">
+
+                            <a href="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/Img40322-04E4C.png">
+                                <img class="chatlog__attachment-media" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/Img40322-04E4C.png" alt="Image attachment" title="Image: Img40322.png (3.95 MB)" loading="lazy">
+                            </a>
+                    </div>
+
+
+            </div>
+            <div class="chatlog__message chatlog__message--pinned" data-message-id="779754513606770758" id="message-779754513606770758" title="Message sent: 21-Nov-20 12:06 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><em>The university&#39;s ballroom. Well, more accurately, it&#39;s an event center, but it&#39;s been furnished to be a ballroom lately. Knock yourself out. A large piano is to the side, and for those who prefer recorded music, a music player as well.</em></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/713e66cc6924ba1b6e51b582b1fb6ac4-4DFB7.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Royalcat08#6390" data-user-id="721911813632950335" style="color: rgb(137,207,240)">Royalcat08</span>
+
+
+        <span class="chatlog__timestamp">22-Nov-20 01:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="780144882386993232" id="message-780144882386993232" title="Message sent: 22-Nov-20 01:57 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">// A BALLROOM <img loading="lazy" class="emoji " alt="👀" title="eyes" src="https://twemoji.maxcdn.com/2/svg/1f440.svg"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/85ea67ea1b8c2f8023aa22c835d8a425-2EFB7.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Turtle Warrior#9991" data-user-id="419179513298288650" style="color: rgb(78,93,148)">tyrtle</span>
+
+
+        <span class="chatlog__timestamp">22-Nov-20 04:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="780177738282958909" id="message-780177738282958909" title="Message sent: 22-Nov-20 04:07 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(is this an scp</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/2946cad86ecbc9d688d9e9f1a4fbb4fd-F474B.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Fujimoto Miyoko#0000" data-user-id="780177837093158922" style="">Fujimoto Miyoko</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">22-Nov-20 04:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="780177837834895363" id="message-780177837834895363" title="Message sent: 22-Nov-20 04:08 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(fuck im dead</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/483f32491afc1d1ef25af9ce9744f961-3891B.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Astrea#7171" data-user-id="229350299909881876" style="color: rgb(154,144,231)">Astrea Senpai | Goddess of Stars</span>
+
+
+        <span class="chatlog__timestamp">22-Nov-20 04:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="780177912040652811" id="message-780177912040652811" title="Message sent: 22-Nov-20 04:08 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(this is side rp</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/2946cad86ecbc9d688d9e9f1a4fbb4fd-F474B.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Fujimoto Miyoko#0000" data-user-id="780177837093158922" style="">Fujimoto Miyoko</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">22-Nov-20 04:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="780177962942595102" id="message-780177962942595102" title="Message sent: 22-Nov-20 04:08 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(true</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/713e66cc6924ba1b6e51b582b1fb6ac4-4DFB7.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Royalcat08#6390" data-user-id="721911813632950335" style="color: rgb(137,207,240)">Royalcat08</span>
+
+
+        <span class="chatlog__timestamp">22-Nov-20 04:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="780177964322258974" id="message-780177964322258974" title="Message sent: 22-Nov-20 04:08 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">//STILL</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/2946cad86ecbc9d688d9e9f1a4fbb4fd-F474B.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Fujimoto Miyoko#0000" data-user-id="780177837093158922" style="">Fujimoto Miyoko</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">22-Nov-20 04:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="780178010212270101" id="message-780178010212270101" title="Message sent: 22-Nov-20 04:08 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><img loading="lazy" class="emoji emoji--large" alt="AlpacaDance" title="AlpacaDance" src="https://cdn.discordapp.com/emojis/608080902282805258.gif"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/483f32491afc1d1ef25af9ce9744f961-3891B.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Astrea#7171" data-user-id="229350299909881876" style="color: rgb(154,144,231)">Astrea Senpai | Goddess of Stars</span>
+
+
+        <span class="chatlog__timestamp">22-Nov-20 04:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="780178021683691530" id="message-780178021683691530" title="Message sent: 22-Nov-20 04:08 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(talia in side rp— nah</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/2946cad86ecbc9d688d9e9f1a4fbb4fd-F474B.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Fujimoto Miyoko#0000" data-user-id="780177837093158922" style="">Fujimoto Miyoko</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">22-Nov-20 04:11 PM</span>
+
+            <div class="chatlog__message " data-message-id="780178660095164428" id="message-780178660095164428" title="Message sent: 22-Nov-20 04:11 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><img loading="lazy" class="emoji emoji--large" alt="CATDANCE" title="CATDANCE" src="https://cdn.discordapp.com/emojis/610010963940474890.gif"><img loading="lazy" class="emoji emoji--large" alt="DogeDance" title="DogeDance" src="https://cdn.discordapp.com/emojis/732550706099126435.gif"><img loading="lazy" class="emoji emoji--large" alt="CowDance" title="CowDance" src="https://cdn.discordapp.com/emojis/758874364879306762.gif"><img loading="lazy" class="emoji emoji--large" alt="dance" title="dance" src="https://cdn.discordapp.com/emojis/722614808897388555.gif"></span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction" title="Mastermindstrueidentity">
+                                <img class="emoji emoji--small" alt="Mastermindstrueidentity" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/688908689851416797-8D991.png" loading="lazy">
+                                <span class="chatlog__reaction-count">2</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/8253276df07d7b64996c7d9c9e130603-10561.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Asuka Hikaru#0000" data-user-id="780177837093158922" style="">Asuka Hikaru</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">22-Nov-20 04:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="780179853294698497" id="message-780179853294698497" title="Message sent: 22-Nov-20 04:16 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><em>Cosplay idol dancing yes.</em></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/beb48f7b846ee2b4d94556ee931cd255-76524.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="AJ Hikaru#0000" data-user-id="780177837093158922" style="">AJ Hikaru</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">22-Nov-20 04:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="780179886904049664" id="message-780179886904049664" title="Message sent: 22-Nov-20 04:16 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><em>And filming~</em></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/2946cad86ecbc9d688d9e9f1a4fbb4fd-F474B.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Fujimoto Miyoko#0000" data-user-id="780177837093158922" style="">Fujimoto Miyoko</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">22-Nov-20 04:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="780180011172495380" id="message-780180011172495380" title="Message sent: 22-Nov-20 04:16 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><em>Dances up to Asuka</em> &quot;Wanna dance with me?&quot;</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/8253276df07d7b64996c7d9c9e130603-10561.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Asuka Hikaru#0000" data-user-id="780177837093158922" style="">Asuka Hikaru</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">22-Nov-20 04:17 PM</span>
+
+            <div class="chatlog__message " data-message-id="780180116990853120" id="message-780180116990853120" title="Message sent: 22-Nov-20 04:17 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><em>Nods her head.</em>
+
+&quot;Let&#39;s do it.&quot;</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/483f32491afc1d1ef25af9ce9744f961-3891B.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Astrea#7171" data-user-id="229350299909881876" style="color: rgb(154,144,231)">Astrea Senpai | Goddess of Stars</span>
+
+
+        <span class="chatlog__timestamp">22-Nov-20 04:17 PM</span>
+
+            <div class="chatlog__message " data-message-id="780180121574309898" id="message-780180121574309898" title="Message sent: 22-Nov-20 04:17 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(is this a
+(dance (dance) revolution</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction" title="umstare">
+                                <img class="emoji emoji--small" alt="umstare" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/747999136632012841-D61AB.png" loading="lazy">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/2946cad86ecbc9d688d9e9f1a4fbb4fd-F474B.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Fujimoto Miyoko#0000" data-user-id="780177837093158922" style="">Fujimoto Miyoko</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">22-Nov-20 04:21 PM</span>
+
+            <div class="chatlog__message " data-message-id="780181163372445736" id="message-780181163372445736" title="Message sent: 22-Nov-20 04:21 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&quot;Yay!&quot; she grabbed her hands and <em>woosh</em> dance time</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/8253276df07d7b64996c7d9c9e130603-10561.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Asuka Hikaru#0000" data-user-id="780177837093158922" style="">Asuka Hikaru</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">22-Nov-20 04:22 PM</span>
+
+            <div class="chatlog__message " data-message-id="780181358898708481" id="message-780181358898708481" title="Message sent: 22-Nov-20 04:22 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&quot;Mhm.&quot;
+
+<em>She smiles and goes with whatever dance they do.</em></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/beb48f7b846ee2b4d94556ee931cd255-76524.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="AJ Hikaru#0000" data-user-id="780177837093158922" style="">AJ Hikaru</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">22-Nov-20 04:22 PM</span>
+
+            <div class="chatlog__message " data-message-id="780181361830658058" id="message-780181361830658058" title="Message sent: 22-Nov-20 04:22 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><em>Filming because that&#39;s his job.</em></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/350e5babd3c6e782febbcc3f3038f558-B1CC4.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Kassie Madison#0000" data-user-id="780177837093158922" style="">Kassie Madison</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">11-Dec-20 09:19 PM</span>
+
+            <div class="chatlog__message " data-message-id="787141470011785237" id="message-787141470011785237" title="Message sent: 11-Dec-20 09:19 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><em>ooo new oc vibing here</em></span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction" title="eye">
+                                <img class="emoji emoji--small" alt="&#128065;️" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/1f441-49BBF.svg" loading="lazy">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">11-Dec-20 10:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="787154468272996362" id="message-787154468272996362" title="Message sent: 11-Dec-20 10:10 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><em>Sasakis vibing here too new oc gone</em>
+
+
+( <span class="mention" title="PandaPrince#0321">@Local Bastard of Babylon Panda</span> just start whenever</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/8097a1dca3e82c5b765723adf03507c4-4243F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="PandaPrince#0321" data-user-id="339972906693951489" style="color: rgb(255,94,0)">Local Bastard of Babylon Panda</span>
+
+
+        <span class="chatlog__timestamp">11-Dec-20 10:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="787155234228404326" id="message-787155234228404326" title="Message sent: 11-Dec-20 10:13 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">((bet lemme get some soda rq and ill start with a funne</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">11-Dec-20 10:14 PM</span>
+
+            <div class="chatlog__message " data-message-id="787155376743252000" id="message-787155376743252000" title="Message sent: 11-Dec-20 10:14 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(alr i might be sleep when u reply</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/8097a1dca3e82c5b765723adf03507c4-4243F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="PandaPrince#0321" data-user-id="339972906693951489" style="color: rgb(255,94,0)">Local Bastard of Babylon Panda</span>
+
+
+        <span class="chatlog__timestamp">11-Dec-20 10:15 PM</span>
+
+            <div class="chatlog__message " data-message-id="787155686080643092" id="message-787155686080643092" title="Message sent: 11-Dec-20 10:15 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">((that&#39;s alright</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/a6b2d6ed2312c8f98505504488c6b249-B4A85.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Omnios Suzuma#0000" data-user-id="780177837093158922" style="">Omnios Suzuma</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">11-Dec-20 10:17 PM</span>
+
+            <div class="chatlog__message " data-message-id="787156237468827678" id="message-787156237468827678" title="Message sent: 11-Dec-20 10:17 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><em>Omnios walked in, not really sure where he was or what he was doing there. He really was only just walking around when had suddenly ended up inside the ball room, only knowing that he disliked how annoying the aura within the ballroom was. I guess being blind coupled with distracted is a bad combination considering he seems to run straight first into a wall.</em></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">12-Dec-20 04:13 AM</span>
+
+            <div class="chatlog__message " data-message-id="787245857643954216" id="message-787245857643954216" title="Message sent: 12-Dec-20 04:13 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><em>Sasaki looks up and sees this he immediately rushes over to the boy that has just fucking got smacked by a wall. Sasaki offers a hand to him</em>
+
+
+&quot;H-hey... you ok?&quot;</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="787245910870196265" id="message-787245910870196265" title="Message sent: 12-Dec-20 04:14 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(i tried being literate</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">12-Dec-20 12:41 PM</span>
+
+            <div class="chatlog__message " data-message-id="787373511089848330" id="message-787373511089848330" title="Message sent: 12-Dec-20 12:41 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">( <span class="mention" title="PandaPrince#0321">@Local Bastard of Babylon Panda</span> <img loading="lazy" class="emoji " alt="Um" title="Um" src="https://cdn.discordapp.com/emojis/773620120823267337.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/8097a1dca3e82c5b765723adf03507c4-4243F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="PandaPrince#0321" data-user-id="339972906693951489" style="color: rgb(255,94,0)">Local Bastard of Babylon Panda</span>
+
+
+        <span class="chatlog__timestamp">12-Dec-20 12:44 PM</span>
+
+            <div class="chatlog__message " data-message-id="787374365594484816" id="message-787374365594484816" title="Message sent: 12-Dec-20 12:44 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">((you&#39;re doing good dw!</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/a6b2d6ed2312c8f98505504488c6b249-B4A85.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Omnios Suzuma#0000" data-user-id="780177837093158922" style="">Omnios Suzuma</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">12-Dec-20 12:46 PM</span>
+
+            <div class="chatlog__message " data-message-id="787374718621450302" id="message-787374718621450302" title="Message sent: 12-Dec-20 12:46 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><em>Omnios laughs, not realizing that someone had managed to see him run straight first into whatever he ran into. He stands up, not really seeing the hand since he can&#39;t see to begin with.</em> &quot;I&#39;m pretty sure im alright! Though I guess being blind and distracted don&#39;t go together!&quot;</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">12-Dec-20 12:49 PM</span>
+
+            <div class="chatlog__message " data-message-id="787375614386503740" id="message-787375614386503740" title="Message sent: 12-Dec-20 12:49 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&quot;Huh...that explains it?&quot;
+
+
+<em>Sasaki is honestly relieved that Omnios is blind since he can&#39;t see all the faults Sasaki has</em>
+
+
+&quot;W-wait... wouldn&#39;t you have a guide dog?... sorry if I sound rude... saying that&quot;</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">12-Dec-20 03:44 PM</span>
+
+            <div class="chatlog__message " data-message-id="787419665952931870" id="message-787419665952931870" title="Message sent: 12-Dec-20 03:44 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(<span class="mention" title="PandaPrince#0321">@Local Bastard of Babylon Panda</span> aaaa <img loading="lazy" class="emoji " alt="Um" title="Um" src="https://cdn.discordapp.com/emojis/773620120823267337.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/a6b2d6ed2312c8f98505504488c6b249-B4A85.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Omnios Suzuma#0000" data-user-id="780177837093158922" style="">Omnios Suzuma</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">12-Dec-20 04:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="787423535652012082" id="message-787423535652012082" title="Message sent: 12-Dec-20 04:00 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&quot;Well, it&#39;s a bit hard to get a guide dog when I don&#39;t really exist legally! And don&#39;t worry about it, i&#39;ve heard worse!&quot; <em>He seemed a bit too cheerful despite what he said.</em></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/8097a1dca3e82c5b765723adf03507c4-4243F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="PandaPrince#0321" data-user-id="339972906693951489" style="color: rgb(255,94,0)">Local Bastard of Babylon Panda</span>
+
+
+        <span class="chatlog__timestamp">12-Dec-20 04:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="787423555322249256" id="message-787423555322249256" title="Message sent: 12-Dec-20 04:00 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">((a</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">12-Dec-20 04:01 PM</span>
+
+            <div class="chatlog__message " data-message-id="787423869103243274" id="message-787423869103243274" title="Message sent: 12-Dec-20 04:01 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&quot;Huh? so... people make fun of you for being blind? how cruel? you seem cool.... and ah... I forgot to introduce myself... im Kaeru Sasaki, The ultimate animator but... please call me Sasaki&quot;
+
+<em>he smiles</em></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">12-Dec-20 04:38 PM</span>
+
+            <div class="chatlog__message " data-message-id="787433152490373150" id="message-787433152490373150" title="Message sent: 12-Dec-20 04:38 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(<span class="mention" title="PandaPrince#0321">@Local Bastard of Babylon Panda</span> ping when reply</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/a6b2d6ed2312c8f98505504488c6b249-B4A85.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Omnios Suzuma#0000" data-user-id="780177837093158922" style="">Omnios Suzuma</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">12-Dec-20 05:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="787453153833386034" id="message-787453153833386034" title="Message sent: 12-Dec-20 05:57 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&quot;Ah, yeah I&#39;ve guess they&#39;ve made those insults too. Anyways, it&#39;s nice to meet you Kaeru! I&#39;m Omnios, the ultimate streamer!&quot; <em>He gives his own smile.</em></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/8097a1dca3e82c5b765723adf03507c4-4243F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="PandaPrince#0321" data-user-id="339972906693951489" style="color: rgb(255,94,0)">Local Bastard of Babylon Panda</span>
+
+
+        <span class="chatlog__timestamp">12-Dec-20 05:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="787453176436752424" id="message-787453176436752424" title="Message sent: 12-Dec-20 05:57 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(( <span class="mention" title="Com#8569">@Com</span> a</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">12-Dec-20 05:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="787453704319926283" id="message-787453704319926283" title="Message sent: 12-Dec-20 05:59 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&quot;Hmm... quick question do you know your in a ball room?...&quot;
+
+<em>is Sasaki gonna dance with this man yes, yes he is</em></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">12-Dec-20 06:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="787455546038681610" id="message-787455546038681610" title="Message sent: 12-Dec-20 06:07 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(( <span class="mention" title="PandaPrince#0321">@Local Bastard of Babylon Panda</span> ea</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/a6b2d6ed2312c8f98505504488c6b249-B4A85.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Omnios Suzuma#0000" data-user-id="780177837093158922" style="">Omnios Suzuma</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">12-Dec-20 07:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="787478973046849556" id="message-787478973046849556" title="Message sent: 12-Dec-20 07:40 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&quot;Ah, is that where I was! I felt like it was too rich for me to be in so it distracted me a bit. At least I didn&#39;t wander into another rich person&#39;s room by accident again.&quot; <em>He breathed a sigh of relief, though whether he was joking or not is a bit...hard to tell.</em></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">12-Dec-20 07:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="787479556343857152" id="message-787479556343857152" title="Message sent: 12-Dec-20 07:42 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&quot;Hmm.... strange question but.... would you like to dance? I really want to try it for once&quot;
+
+
+<em>Sasaki being bold? or is he flirting will we know nope because it&#39;s Sasaki and no one knows how he works</em></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/a6b2d6ed2312c8f98505504488c6b249-B4A85.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Omnios Suzuma#0000" data-user-id="780177837093158922" style="">Omnios Suzuma</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">12-Dec-20 07:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="787483859914326056" id="message-787483859914326056" title="Message sent: 12-Dec-20 07:59 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><em>A mischievous side of Omnios seems to take over as a small smirk appears on him.</em> &quot;Aw, aren&#39;t you surprisingly bold despite us meeting or the first time!~ Unfortunately I don&#39;t really know how to dance so it may be a bit of a disappointment.&quot;</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">12-Dec-20 08:02 PM</span>
+
+            <div class="chatlog__message " data-message-id="787484674850553906" id="message-787484674850553906" title="Message sent: 12-Dec-20 08:02 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&quot;Im always a disappointment! and yeah.... I am rather... bold... despite being an animator and the son of parents who run a militia and... want me dead...&quot;
+
+
+<em>he is just exited his purple starry eyes lit up the entire time as he spoke he&#39;s just exited to dance with someone</em></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">12-Dec-20 08:24 PM</span>
+
+            <div class="chatlog__message " data-message-id="787490033875025940" id="message-787490033875025940" title="Message sent: 12-Dec-20 08:24 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(<span class="mention" title="PandaPrince#0321">@Local Bastard of Babylon Panda</span> <img loading="lazy" class="emoji " alt="bloosh" title="bloosh" src="https://cdn.discordapp.com/emojis/749434905829572618.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/a6b2d6ed2312c8f98505504488c6b249-B4A85.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Omnios Suzuma#0000" data-user-id="780177837093158922" style="">Omnios Suzuma</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">12-Dec-20 09:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="787501560162418759" id="message-787501560162418759" title="Message sent: 12-Dec-20 09:10 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&quot;That&#39;s certainly quite a family! Having a family like that certainly doesn&#39;t seem healthy in my opinion. Anyways, why choose to dance with me? Considering i&#39;m blind along with not knowing how to, i&#39;m pretty sure we&#39;ll both bump or trip over each other!&quot;</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">12-Dec-20 09:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="787502090535698472" id="message-787502090535698472" title="Message sent: 12-Dec-20 09:12 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&quot;Because your the only other person here, Your cute, I really want to dance and it seems like it would be really fun despite us falling over eachother..as a possibility&quot;
+
+
+<em>Sasaki is just trying to not show his heart is going fast af rn</em></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="787502883871916072" id="message-787502883871916072" title="Message sent: 12-Dec-20 09:15 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(<span class="mention" title="PandaPrince#0321">@Local Bastard of Babylon Panda</span> sibby cup</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/a_099f445a03dc96124a54eed141e61e78-BCB7A.gif" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="CronchyTurtle#8008" data-user-id="486181655837671425" style="color: rgb(238,29,154)">clown 4</span>
+
+
+        <span class="chatlog__timestamp">12-Dec-20 09:52 PM</span>
+
+            <div class="chatlog__message " data-message-id="787512185407799297" id="message-787512185407799297" title="Message sent: 12-Dec-20 09:52 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(blood still stains when the sheets are washed
+(sex dont sleep when the lights are off
+(kids are still depressed when you dress them up
+(and syrup is still syrup in a sippy cup</span>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="chatlog__reactions">
+                            <div class="chatlog__reaction" title="umstare">
+                                <img class="emoji emoji--small" alt="umstare" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/747999136632012841-D61AB.png" loading="lazy">
+                                <span class="chatlog__reaction-count">1</span>
+                            </div>
+                    </div>
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">13-Dec-20 04:51 AM</span>
+
+            <div class="chatlog__message " data-message-id="787617599843991582" id="message-787617599843991582" title="Message sent: 13-Dec-20 04:51 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(why</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/baffff7c1c9e079062ad0407d339f5fb-F5F6E.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="TeedOrSamus#5040" data-user-id="421443817703473172" style="color: rgb(255,215,0)">TeedOrSamus</span>
+
+
+        <span class="chatlog__timestamp">13-Dec-20 09:31 AM</span>
+
+            <div class="chatlog__message " data-message-id="787688104211251251" id="message-787688104211251251" title="Message sent: 13-Dec-20 09:31 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(syrup is still syrup in a sippy cup WHO DOES THAT</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/a6b2d6ed2312c8f98505504488c6b249-B4A85.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Omnios Suzuma#0000" data-user-id="780177837093158922" style="">Omnios Suzuma</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">13-Dec-20 02:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="787758462440308757" id="message-787758462440308757" title="Message sent: 13-Dec-20 02:10 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><em>A shocked expression appears on Omnios&#39; face, having not expected him to actually boldly flirt with him.</em> &quot;My, it seems then that us falling over each other has already happened considering that you have fallen for me! I have also fallen for you considering...well considering that I did fall earlier.&quot;</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">13-Dec-20 02:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="787759182195589130" id="message-787759182195589130" title="Message sent: 13-Dec-20 02:13 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(<img loading="lazy" class="emoji " alt="😳" title="flushed" src="https://twemoji.maxcdn.com/2/svg/1f633.svg"></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="787759651159539712" id="message-787759651159539712" title="Message sent: 13-Dec-20 02:15 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&quot;Huh? oh yeah...it seems...its like... you falling over was like fate or something... n-not like I believe in t-that kinda stuff... it.... just... kinda s-seems like that&#39;s what happened&quot;
+
+<em>sasaki is blushing slightly yeah hes just very happy</em></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/a_099f445a03dc96124a54eed141e61e78-BCB7A.gif" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="CronchyTurtle#8008" data-user-id="486181655837671425" style="color: rgb(238,29,154)">clown 4</span>
+
+
+        <span class="chatlog__timestamp">13-Dec-20 06:11 PM</span>
+
+            <div class="chatlog__message " data-message-id="787819101858168852" id="message-787819101858168852" title="Message sent: 13-Dec-20 06:11 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(he&#39;s still dead when you&#39;re done with the bottle
+(of course it&#39;s a corpse you keep in the cradle
+(kids are still depressed when you dress them up
+(and syrup is still syrup in a sippy cup</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">13-Dec-20 06:15 PM</span>
+
+            <div class="chatlog__message " data-message-id="787820046277148682" id="message-787820046277148682" title="Message sent: 13-Dec-20 06:15 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(die</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/a_099f445a03dc96124a54eed141e61e78-BCB7A.gif" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="CronchyTurtle#8008" data-user-id="486181655837671425" style="color: rgb(238,29,154)">clown 4</span>
+
+
+        <span class="chatlog__timestamp">13-Dec-20 06:16 PM</span>
+
+            <div class="chatlog__message " data-message-id="787820197016502272" id="message-787820197016502272" title="Message sent: 13-Dec-20 06:16 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(Maybe</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="787820254846779422" id="message-787820254846779422" title="Message sent: 13-Dec-20 06:16 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">(<s>but it&#39;s a good song I recommend</s></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/a6b2d6ed2312c8f98505504488c6b249-B4A85.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Omnios Suzuma#0000" data-user-id="780177837093158922" style="">Omnios Suzuma</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">13-Dec-20 07:00 PM</span>
+
+            <div class="chatlog__message " data-message-id="787831467585175552" id="message-787831467585175552" title="Message sent: 13-Dec-20 07:00 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&quot;Fate...I wonder if it truly does exist... Anyways, there&#39;s still the issue of me not really knowing how to dance... After all I think both of us falling may be the least of our worries if we do!&quot;</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">13-Dec-20 07:06 PM</span>
+
+            <div class="chatlog__message " data-message-id="787832733074063371" id="message-787832733074063371" title="Message sent: 13-Dec-20 07:06 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&quot;Yeah..... Also dont worry about not being able to dance! I can&#39;t dance either I&#39;m an animator, not a dancer&quot;
+
+<em>he just smiles</em>
+
+&quot;B-but I&#39;m willing to try dancing&quot;</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">21-Dec-20 04:30 PM</span>
+
+            <div class="chatlog__message " data-message-id="790692799469060106" id="message-790692799469060106" title="Message sent: 21-Dec-20 04:30 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">( <span class="mention" title="PandaPrince#0321">@Local Bastard of Babylon Panda</span></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/a6b2d6ed2312c8f98505504488c6b249-B4A85.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Omnios Suzuma#0000" data-user-id="780177837093158922" style="">Omnios Suzuma</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">21-Dec-20 07:27 PM</span>
+
+            <div class="chatlog__message " data-message-id="790737182801002496" id="message-790737182801002496" title="Message sent: 21-Dec-20 07:27 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><em>Omnios laughed, amused by Sasaki&#39;s determination to dance.</em> &quot;Alright then! First however, how should we start to dance? After all I&#39;m pretty sure there&#39;s a start to is.&quot;</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/8097a1dca3e82c5b765723adf03507c4-4243F.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="PandaPrince#0321" data-user-id="339972906693951489" style="color: rgb(255,94,0)">Local Bastard of Babylon Panda</span>
+
+
+        <span class="chatlog__timestamp">21-Dec-20 07:27 PM</span>
+
+            <div class="chatlog__message " data-message-id="790737200391258135" id="message-790737200391258135" title="Message sent: 21-Dec-20 07:27 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">( <span class="mention" title="Com#8569">@Com</span> a</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">21-Dec-20 07:28 PM</span>
+
+            <div class="chatlog__message " data-message-id="790737440360103957" id="message-790737440360103957" title="Message sent: 21-Dec-20 07:28 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&quot;Im not actually sure to be honest.... I don&#39;t know but........... im sure it will be easy right??????????????????&quot;</span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/e49861eea33b8255b85c9998e678aaab-DF706.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Com#8569" data-user-id="302121894834995201" style="">Com</span>
+
+
+        <span class="chatlog__timestamp">23-Dec-20 07:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="791470100560871435" id="message-791470100560871435" title="Message sent: 23-Dec-20 07:59 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><em>he left a lil while ago im sorry idk how to continue this panda</em></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="Danganronpa_%20Despair%27s%20Horizon%20-%20%E2%80%A2%E2%9D%85%E2%94%80%E2%9C%A7%E2%9D%85Side%20RP%20%28City%29%E2%9D%85%E2%9C%A7%E2%94%80%E2%9D%85%E2%80%A2%20-%20ballroom%20%5B779392212814921779%5D.html_Files/6a95012b2585a72330163acb71319492-76A00.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Asuka Hikaru#0000" data-user-id="780177837093158922" style="">Asuka Hikaru</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">08-Feb-21 06:05 PM</span>
+
+            <div class="chatlog__message " data-message-id="808473666543157309" id="message-808473666543157309" title="Message sent: 08-Feb-21 06:05 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><em>For whatever reason the cosplayer is wearing a dress and is dancing.</em>
+
+<em>OwO I just wanted to send a tupper message.</em></span>
+
+                        </div>
+                    </div>
+
+
+
+            </div>
+    </div>
+</div>
+
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 66 message(s)</div>
+</div>
+
+</body>
+
+</html>
